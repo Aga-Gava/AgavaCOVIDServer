@@ -20,7 +20,7 @@ public class AgavaCovidServer {
             Class.forName("org.mariadb.jdbc.Driver").newInstance();
             Connection conn = null;
             conn =  DriverManager.getConnection("jdbc:mariadb://localhost:3327/agavacovid?" +
-                "user=root&password=sunrise");
+                "user=root&password=patata");
             System.out.println("AAAA");
             
             Statement stmt = null;
