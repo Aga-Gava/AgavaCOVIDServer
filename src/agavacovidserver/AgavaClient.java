@@ -9,6 +9,9 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.DatagramPacket;
+import java.net.InetAddress;
+import java.net.MulticastSocket;
 import sockets.AgavaSocket;
 
 /**
@@ -18,13 +21,13 @@ import sockets.AgavaSocket;
 public class AgavaClient extends AgavaSocket {
    public AgavaClient() throws IOException{super("cliente");} //Se usa el constructor para cliente de Conexion
 
-    public void startClient(){ //Método para iniciar el cliente
+    public void startClient() throws IOException{ //Método para iniciar el cliente
         try{
         
             //Flujo de datos hacia el servidor
             salidaServidor = new DataOutputStream(cs.getOutputStream());
 salidaServidor.writeUTF("INSERT INTO ids_infectados (clave_gen, fecha_gen, fecha_rec)"
-        + " VALUES ('empoleon', '2021-03-04', '2015-02-02')");
+        + " VALUES ('staraptor', '2019-03-04', '2015-02-02')");
             //Se enviarán dos mensajes
             for (int i = 0; i < 2; i++)
             {
@@ -41,5 +44,27 @@ salidaServidor.writeUTF("INSERT INTO ids_infectados (clave_gen, fecha_gen, fecha
         
             System.out.println(e.getMessage());
         }
+        
+        MulticastSocket socket = new MulticastSocket(4446);
+        InetAddress group = InetAddress.getByName("224.84.33.27");
+        socket.joinGroup(group);
+
+        DatagramPacket packet;
+        for (int i = 0; i < 5; i++) {
+            byte[] buf = new byte[256];
+            packet = new DatagramPacket(buf, buf.length);
+            socket.receive(packet);
+
+            String received = new String(packet.getData());
+            System.out.println("Quote of the Moment: " + received);
+        }
+
+        socket.leaveGroup(group);
+        socket.close();
+        
+        
+        
+        
+        
     } 
 }
