@@ -46,7 +46,7 @@ salidaServidor.writeUTF("INSERT INTO ids_infectados (clave_gen, fecha_gen, fecha
         }
         
         MulticastSocket socket = new MulticastSocket(4446);
-        InetAddress group = InetAddress.getByName("224.84.33.27");
+        InetAddress group = InetAddress.getByName("224.0.1.27");
         socket.joinGroup(group);
 
         DatagramPacket packet;

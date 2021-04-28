@@ -50,16 +50,17 @@ public class MulticastServerThread extends QuoteServerThread {
                     // construct quote
                 String dString = null;
                 if (in == null)
-                    dString = new Date().toString();
+                    dString = "patata";// new Date().toString();
                 else
                     dString = getNextQuote();
                 buf = dString.getBytes();
-
+                
 		    // send it
-                InetAddress group = InetAddress.getByName("224.84.33.27");
+                InetAddress group = InetAddress.getByName("224.0.0.251");
                 DatagramPacket packet = new DatagramPacket(buf, buf.length, group, 4446);
+                
                 socket.send(packet);
-
+                System.out.println("PUAAAAAAAAAAAAAAAAAAAAAAAA");
 		    // sleep for a while
 		try {
 		    sleep((long)(Math.random() * FIVE_SECONDS));
