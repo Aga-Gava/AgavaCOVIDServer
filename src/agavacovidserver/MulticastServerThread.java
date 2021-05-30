@@ -50,7 +50,7 @@ public class MulticastServerThread extends QuoteServerThread {
                     // construct quote
                 String dString = null;
                 if (in == null)
-                    dString = "patata";// new Date().toString();
+                    dString = "Has recibido un virus (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧";// new Date().toString();
                 else
                     dString = getNextQuote();
                 buf = dString.getBytes();
@@ -63,7 +63,7 @@ public class MulticastServerThread extends QuoteServerThread {
                 System.out.println("PUAAAAAAAAAAAAAAAAAAAAAAAA");
 		    // sleep for a while
 		try {
-		    sleep((long)(Math.random() * FIVE_SECONDS));
+		    sleep((long)(Math.random()*FIVE_SECONDS));
 		} catch (InterruptedException e) { }
             } catch (IOException e) {
                 e.printStackTrace();
