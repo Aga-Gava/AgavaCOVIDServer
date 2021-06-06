@@ -32,7 +32,14 @@ package agavacovidserver;
 
 import java.io.*;
 import java.net.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import persistence.ConnectionPool;
+
 
 public class MulticastServerThread extends QuoteServerThread {
 
@@ -44,32 +51,66 @@ public class MulticastServerThread extends QuoteServerThread {
 
     public void run() {
         while (moreQuotes) {
+            
             try {
                 byte[] buf = new byte[256];
-                
+
                     // construct quote
                 String dString = null;
-                if (in == null)
-                    dString = "Has recibido un virus (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧";// new Date().toString();
-                else
+                ConnectionPool conn = ConnectionPool.getInstance();
+                List<String> enviar = new ArrayList<>();
+                Statement stmt;
+                ResultSet rs;
+                //SQL query command
+                //SQL = "SELECT * FROM ids_infectados WHERE clave_gen = 'empoleon'";
+                //System.out.println(stmt + " el stmt");
+                //System.out.println(rs + " el rs");
+                //System.out.println(SQL +" la sql");
+                String SQL = "SELECT * FROM ids_infectados";
+                stmt = conn.createStatement();
+                //System.out.println(stmt + " el stmt despues de pedirselect *");
+                rs = stmt.executeQuery(SQL);
+                if (in == null){      
+                while (rs.next()) {
+                    enviar.add(rs.getString("clave_gen") 
+                    + "," + rs.getString("fecha_gen")); 
+//                  
+                }
+                
+                for(String s: enviar){
+                    dString=s;
+                     buf = dString.getBytes();
+
+                // send it
+                    InetAddress group = InetAddress.getByName("224.0.0.251");
+                    DatagramPacket packet = new DatagramPacket(buf, buf.length, group, 4446);
+
+                    socket.send(packet);
+                }
+                
+                    //dString = "Has recibido un virus (ﾉ◕ヮ◕)ﾉ:･ﾟ✧";// new Date().toString();
+                }else{
                     dString = getNextQuote();
-                buf = dString.getBytes();
-                
-		    // send it
-                InetAddress group = InetAddress.getByName("224.0.0.251");
-                DatagramPacket packet = new DatagramPacket(buf, buf.length, group, 4446);
-                
-                socket.send(packet);
+                    buf = dString.getBytes();
+
+                // send it
+                    InetAddress group = InetAddress.getByName("224.0.0.251");
+                    DatagramPacket packet = new DatagramPacket(buf, buf.length, group, 4446);
+
+                    socket.send(packet);
+                }
                 System.out.println("PUAAAAAAAAAAAAAAAAAAAAAAAA");
-		    // sleep for a while
-		try {
-		    sleep((long)(Math.random()*FIVE_SECONDS));
-		} catch (InterruptedException e) { }
+            // sleep for a while
+        try {
+            sleep((long)(FIVE_SECONDS));
+        } catch (InterruptedException e) { }
             } catch (IOException e) {
                 e.printStackTrace();
-		moreQuotes = false;
+        moreQuotes = false;
+            } catch (SQLException ex) {
+                Logger.getLogger(MulticastServerThread.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-	socket.close();
+    socket.close();
     }
 }

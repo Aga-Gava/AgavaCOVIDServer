@@ -69,7 +69,7 @@ public class AgavaServer extends AgavaSocket{ //Se hereda de conexión para hace
                         String fechaGen = arrSplit[i+1];
                         stmt = conn.createStatement();
                         String query = "INSERT INTO ids_infectados (clave_gen, fecha_gen, fecha_rec) "
-                                + "VALUES ("+ claveGen +","+ fechaGen +","+ fechaRec +");";
+                                + "VALUES ('"+ claveGen +"','"+ fechaGen +"','"+ fechaRec +"');";
                         rs = stmt.executeQuery(query);
                         i=i+1;
                     }
