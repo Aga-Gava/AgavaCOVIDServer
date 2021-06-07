@@ -16,6 +16,7 @@ import java.sql.Statement;
 import java.util.Arrays;
 import java.util.List;
 import persistence.ConnectionPool;
+import security.Encriptado;
 import sockets.AgavaSocket;
 
 
@@ -52,6 +53,7 @@ public class AgavaServer extends AgavaSocket{ //Se hereda de conexión para hace
             while((mensajeServidor = entrada.readUTF()) != null){ //Mientras haya mensajes desde el cliente
             
                 //Se muestra por pantalla el mensaje recibido
+                mensajeServidor = Encriptado.decrypt(mensajeServidor);
                 System.out.println(mensajeServidor);
                 String[] arrSplit = mensajeServidor.split(",");
                 boolean continua = false;
