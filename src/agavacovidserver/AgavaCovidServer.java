@@ -21,7 +21,7 @@ public class AgavaCovidServer {
      */
     public static void main(String[] args) throws IOException {
         
-        AgavaPreferences.setCredentials("root", "agava");
+        AgavaPreferences.setCredentials("root", "sunrise");
         
             AgavaServer serv = new AgavaServer(); //Se crea el servidor
          
