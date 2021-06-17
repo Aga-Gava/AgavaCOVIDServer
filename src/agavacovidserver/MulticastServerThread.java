@@ -99,7 +99,7 @@ public class MulticastServerThread extends QuoteServerThread {
 
                     socket.send(packet);
                 }
-                System.out.println("PUAAAAAAAAAAAAAAAAAAAAAAAA");
+                System.out.println("Enviando...");
             // sleep for a while
         try {
             sleep((long)(FIVE_SECONDS));
