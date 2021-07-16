@@ -61,14 +61,8 @@ public class MulticastServerThread extends QuoteServerThread {
                 List<String> enviar = new ArrayList<>();
                 Statement stmt;
                 ResultSet rs;
-                //SQL query command
-                //SQL = "SELECT * FROM ids_infectados WHERE clave_gen = 'empoleon'";
-                //System.out.println(stmt + " el stmt");
-                //System.out.println(rs + " el rs");
-                //System.out.println(SQL +" la sql");
                 String SQL = "SELECT * FROM ids_infectados";
                 stmt = conn.createStatement();
-                //System.out.println(stmt + " el stmt despues de pedirselect *");
                 rs = stmt.executeQuery(SQL);
                 if (in == null){      
                 while (rs.next()) {
@@ -88,7 +82,6 @@ public class MulticastServerThread extends QuoteServerThread {
                     socket.send(packet);
                 }
                 
-                    //dString = "Has recibido un virus (ﾉ◕ヮ◕)ﾉ:･ﾟ✧";// new Date().toString();
                 }else{
                     dString = getNextQuote();
                     buf = dString.getBytes();

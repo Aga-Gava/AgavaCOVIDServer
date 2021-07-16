@@ -5,10 +5,8 @@
  */
 package agavacovidserver;
 
-import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
@@ -16,7 +14,8 @@ import sockets.AgavaSocket;
 
 /**
  *
- * @author Juan
+ * @author Juan Velazquez Garcia
+ * @author Maria Ruiz Molina
  */
 public class AgavaClient extends AgavaSocket {
    public AgavaClient() throws IOException{super("cliente");} //Se usa el constructor para cliente de Conexion

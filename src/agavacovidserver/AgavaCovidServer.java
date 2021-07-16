@@ -1,27 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package agavacovidserver;
-//import java.io.IOException;
-import java.sql.*;
 import persistence.AgavaPreferences;
-import persistence.ConnectionPool;
 import server.AgavaServer;
 import java.io.*;
 /**
  *
- * @author agapo
+ * @author Juan Velazquez Garcia
+ * @author Maria Ruiz Molina
  */
 public class AgavaCovidServer {
 
-    /**
-     * @param args the command line arguments
-     */
+   
     public static void main(String[] args) throws IOException {
         
-        AgavaPreferences.setCredentials("root", "sunrise");
+        AgavaPreferences.setCredentials("root", "agava");
         
             AgavaServer serv = new AgavaServer(); //Se crea el servidor
          

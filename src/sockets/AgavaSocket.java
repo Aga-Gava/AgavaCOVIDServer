@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sockets;
 
 import java.io.DataOutputStream;
@@ -12,11 +7,12 @@ import java.net.Socket;
 
 /**
  *
- * @author Juan
+ * @author Juan Velazquez Garcia
+ * @author Maria Ruiz Molina
  */
 public class AgavaSocket {
     private final int PUERTO = 3384; //Puerto para la conexión
-    private final String HOST = "192.168.1.41"; //Host para la conexión
+    private final String HOST = "192.168.1.14"; //Host para la conexión
     protected String mensajeServidor; //Mensajes entrantes (recibidos) en el servidor
     protected ServerSocket ss; //Socket del servidor
     protected Socket cs; //Socket del cliente

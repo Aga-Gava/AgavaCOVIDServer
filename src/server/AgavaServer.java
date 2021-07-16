@@ -1,29 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package server;
 
-import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
-import java.util.List;
 import persistence.ConnectionPool;
 import security.Encriptado;
-import security.Encriptado2;
 import sockets.AgavaSocket;
 
 
 /**
  *
- * @author Juan
+ * @author Juan Velazquez Garcia
+ * @author Maria Ruiz Molina
  */
 public class AgavaServer extends AgavaSocket{ //Se hereda de conexión para hacer uso de los sockets y demás
 
@@ -79,28 +71,19 @@ public class AgavaServer extends AgavaSocket{ //Se hereda de conexión para hace
                 }
 
                     try {
-            //System.out.println("Estoy pero sin conn");
             ConnectionPool conn = ConnectionPool.getInstance();
             
             Statement stmt;
             ResultSet rs;
-            //SQL query command
-            //SQL = "SELECT * FROM ids_infectados WHERE clave_gen = 'empoleon'";
-            //System.out.println(stmt + " el stmt");
-            //System.out.println(rs + " el rs");
-            //System.out.println(SQL +" la sql");
             String SQL = "SELECT * FROM ids_infectados";
             stmt = conn.createStatement();
-            //System.out.println(stmt + " el stmt despues de pedirselect *");
             rs = stmt.executeQuery(SQL);
-            //System.out.println("Tengo to pa imprimir leches");
             while (rs.next()) {
                 System.out.println(rs.getString("id") 
             + " " + rs.getString("clave_gen") 
             + " : " + rs.getString("fecha_gen") 
             + " : " + rs.getString("fecha_rec"));
                 }
-            //System.out.println("Pa mi");
             } catch (SQLException e) {
                 System.out.println("SQL Exception: "+ e.toString());
             } catch (Exception ex) {
